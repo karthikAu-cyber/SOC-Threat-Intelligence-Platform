@@ -1,4 +1,4 @@
-# Unified SOC Threat Intelligence Platform
+# Unified SOC Threat Intelligence Platform using Kali linux
 
 ## 🛡️ Project Overview
 This project simulates a modern Security Operations Center (SOC) environment by combining **Active Vulnerability Assessment** (Red Team) with **Real-time SIEM Monitoring** (Blue Team). 

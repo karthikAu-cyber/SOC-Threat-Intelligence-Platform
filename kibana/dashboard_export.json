@@ -1,0 +1,63 @@
+{
+  "version": "8.11.0",
+  "objects": [
+    {
+      "id": "vulnsec-index-pattern",
+      "type": "index-pattern",
+      "attributes": {
+        "title": "vuln-findings-*",
+        "timeFieldName": "@timestamp",
+        "fields": "[]"
+      }
+    },
+    {
+      "id": "vulnsec-severity-pie",
+      "type": "visualization",
+      "attributes": {
+        "title": "Findings by Severity",
+        "visState": "{\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":true},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\"},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"severity\",\"size\":10,\"order\":\"desc\"}}]}"
+      },
+      "references": [{"id": "vulnsec-index-pattern", "name": "kibanaSavedObjectMeta.searchSourceJSON.index", "type": "index-pattern"}]
+    },
+    {
+      "id": "vulnsec-vuln-type-bar",
+      "type": "visualization",
+      "attributes": {
+        "title": "Vulnerabilities by Type",
+        "visState": "{\"type\":\"histogram\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"labels\":{\"show\":true,\"truncate\":100},\"position\":\"bottom\",\"scale\":{\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{},\"type\":\"category\"}],\"grid\":{\"categoryLines\":false},\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"labels\":{\"show\":true},\"name\":\"LeftAxis-1\",\"position\":\"left\",\"scale\":{\"mode\":\"normal\",\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{\"text\":\"Count\"},\"type\":\"value\"}]},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\"},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"vuln_type\",\"size\":10,\"order\":\"desc\"}}]}"
+      },
+      "references": [{"id": "vulnsec-index-pattern", "name": "kibanaSavedObjectMeta.searchSourceJSON.index", "type": "index-pattern"}]
+    },
+    {
+      "id": "vulnsec-timeline",
+      "type": "visualization",
+      "attributes": {
+        "title": "Findings Over Time",
+        "visState": "{\"type\":\"line\",\"params\":{\"addLegend\":true,\"addTooltip\":true,\"showCircles\":true},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\"},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\"}}]}"
+      },
+      "references": [{"id": "vulnsec-index-pattern", "name": "kibanaSavedObjectMeta.searchSourceJSON.index", "type": "index-pattern"}]
+    },
+    {
+      "id": "vulnsec-cvss-histogram",
+      "type": "visualization",
+      "attributes": {
+        "title": "CVSS Score Distribution",
+        "visState": "{\"type\":\"histogram\",\"params\":{},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\"},{\"id\":\"2\",\"enabled\":true,\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"cvss_score\",\"interval\":1,\"min_doc_count\":false,\"has_extended_bounds\":false}}]}"
+      },
+      "references": [{"id": "vulnsec-index-pattern", "name": "kibanaSavedObjectMeta.searchSourceJSON.index", "type": "index-pattern"}]
+    },
+    {
+      "id": "vulnsec-main-dashboard",
+      "type": "dashboard",
+      "attributes": {
+        "title": "VulnSec Threat Dashboard",
+        "description": "Automated Web Vulnerability Scanner — ELK Threat Dashboard",
+        "panelsJSON": "[{\"panelIndex\":\"1\",\"gridData\":{\"x\":0,\"y\":0,\"w\":24,\"h\":15,\"i\":\"1\"},\"id\":\"vulnsec-severity-pie\",\"type\":\"visualization\"},{\"panelIndex\":\"2\",\"gridData\":{\"x\":24,\"y\":0,\"w\":24,\"h\":15,\"i\":\"2\"},\"id\":\"vulnsec-vuln-type-bar\",\"type\":\"visualization\"},{\"panelIndex\":\"3\",\"gridData\":{\"x\":0,\"y\":15,\"w\":48,\"h\":15,\"i\":\"3\"},\"id\":\"vulnsec-timeline\",\"type\":\"visualization\"},{\"panelIndex\":\"4\",\"gridData\":{\"x\":0,\"y\":30,\"w\":24,\"h\":15,\"i\":\"4\"},\"id\":\"vulnsec-cvss-histogram\",\"type\":\"visualization\"}]",
+        "timeRestore": false,
+        "kibanaSavedObjectMeta": {
+          "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}"
+        }
+      }
+    }
+  ]
+}
